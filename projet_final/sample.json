@@ -1,0 +1,46 @@
+{
+    "Category": [
+        "Discussion",
+        "Grand Theft Auto V",
+        "Counter-Strike: Global Offensive",
+        "Minecraft",
+        "VALORANT"
+    ],
+    "Viewer": [
+        425800,
+        209200,
+        175200,
+        158500,
+        122800
+    ],
+    "Tag": [
+        [
+            "IRL"
+        ],
+        [
+            "Jeux d\u2019aventure",
+            "FPS"
+        ],
+        [
+            "FPS",
+            "Jeux de tir",
+            "Action"
+        ],
+        [
+            "Jeux d\u2019aventure",
+            "MMO"
+        ],
+        [
+            "Jeux de tir",
+            "FPS",
+            "Action"
+        ]
+    ],
+    "Link": [
+        "https://www.twitch.tv/directory/game/Just%20Chatting",
+        "https://www.twitch.tv/directory/game/Grand%20Theft%20Auto%20V",
+        "https://www.twitch.tv/directory/game/Counter-Strike%3A%20Global%20Offensive",
+        "https://www.twitch.tv/directory/game/Minecraft",
+        "https://www.twitch.tv/directory/game/VALORANT"
+    ]
+}
