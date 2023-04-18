@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 import twitchdriver
 import json
 
-
 def main():
     driver = twitchdriver.TwitchDriver()
     data = driver.get_categories(5)
@@ -73,7 +72,7 @@ def plot_langues_vues(json_file):
     plt.title('Viewer by Language ' + formatted_now, fontsize=45)
     plt.xlabel('Language', fontsize=40)
     plt.ylabel('NumberOfViewer', fontsize=40)
-    sns.despine()  # Remove the top and right spines
+    sns.despine()
     plt.show()
 
 
