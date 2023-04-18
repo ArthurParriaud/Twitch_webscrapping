@@ -68,8 +68,5 @@ def main():
     print(Game_data)
     createJSON(Game_data)
     dataviz('sample.json')
-    print("Voici notre programme")
-
-
 main()
 
