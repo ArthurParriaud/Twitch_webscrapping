@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import twitchdriver
 import json
 
+
 def main():
     driver = twitchdriver.TwitchDriver()
     data = driver.get_categories(5)
