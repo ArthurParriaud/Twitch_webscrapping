@@ -7,13 +7,14 @@ import json
 
 def main():
     driver = twitchdriver.TwitchDriver()
-    data = driver.get_categories(5)
+    data = driver.get_categories(10)
 
     Category_data = dict()
     Category_data['Category'] = data[0]
     Category_data['Viewer'] = data[1]
     Category_data['Tag'] = data[2]
     Category_data['Link'] = data[3]
+
     langues = getViewerPerLanguage(driver, Category_data)
     Language_data = dict()
     Language_data['Language'] = []
@@ -33,7 +34,7 @@ def createJSON(data,nom):
         json.dump(data, outfile, indent = 4)
 
 def getViewerPerLanguage(driver, data):
-    data_top_streams = driver.get_top_streams(data['Link'], 10)
+    data_top_streams = driver.get_top_streams(data['Link'], 15)
     langues = [["Français", 0], ["English", 0], ["Deutsch", 0], ["Español", 0], ["Italiano", 0], ["中文", 0], ["日本語", 0], ["العربية", 0]]
     for cat in data_top_streams:
         for stream in cat:
@@ -45,35 +46,49 @@ def getViewerPerLanguage(driver, data):
 
 def dataviz(json_file):
     df = pd.read_json(json_file)
-    plt.figure(figsize=(15, 20))
-    sns.set(rc={'figure.figsize': (15, 20)})
+    for i in range(len(df["Category"])):
+        df.loc[i,'Category'] = getShortername(df['Category'][i])
+    plt.figure(figsize=(60, 70))
+    sns.set(rc={'figure.figsize': (60, 90)})
     sns.barplot(x='Category', y='Viewer', data=df)
-    plt.xticks(rotation=45, ha='right', fontsize=36)
-    plt.yticks(fontsize=36)
+    plt.xticks(rotation=45, ha='right', fontsize=66)
+    plt.yticks(fontsize=86)
 
     now = datetime.datetime.now()
-    formatted_now = now.strftime("le %d/%m/%y à %Hh%Mmin%Ss")
-    plt.title('Viewer by Category ' + formatted_now, fontsize=45)
-    plt.xlabel('Category', fontsize=40)
-    plt.ylabel('Viewer', fontsize=40)
+    formatted_now = now.strftime("on %m/%d/%y at %Hh%Mmin%Ss")
+    plt.title('Viewer by Category ' + formatted_now, fontsize=115)
+    plt.xlabel('Category', fontsize=100)
+    plt.ylabel('Viewer', fontsize=120)
     sns.despine()  # Remove the top and right spines
     plt.show()
 
 def plot_langues_vues(json_file):
     df = pd.read_json(json_file)
-    plt.figure(figsize=(15, 20))
-    sns.set(rc={'figure.figsize': (15, 20)})
+    plt.figure(figsize=(60, 70))
+    sns.set(rc={'figure.figsize': (60, 90)})
+    df.loc[5,'Language'] = "Chinese"
+    df.loc[6,'Language'] = "Japanese"
+    df.loc[7,'Language'] = "Arabic"
     sns.barplot(x='Language', y='NumberOfViewer', data=df)
-    plt.xticks(rotation=45, ha='right', fontsize=36)
-    plt.yticks(fontsize=36)
+    plt.xticks(rotation=45, ha='right', fontsize=100)
+    plt.yticks(fontsize=100)
 
     now = datetime.datetime.now()
-    formatted_now = now.strftime("le %d/%m/%y à %Hh%Mmin%Ss")
-    plt.title('Viewer by Language ' + formatted_now, fontsize=45)
-    plt.xlabel('Language', fontsize=40)
-    plt.ylabel('NumberOfViewer', fontsize=40)
+    formatted_now = now.strftime("on %m/%d/%y at %Hh%Mmin%Ss")
+    plt.title('Viewer by Language ' + formatted_now, fontsize=115)
+    plt.xlabel('Language', fontsize=100)
+    plt.ylabel('NumberOfViewer', fontsize=120)
     sns.despine()  # Remove the top and right spines
     plt.show()
 
+def getShortername(word):
+    if word == "Grand Theft Auto V":
+        return "GTA V"
+    if word == "League of Legends":
+        return "LoL"
+    if word == "Counter-Strike: Global Offensive":
+        return "CS:GO"
+    else:
+        return word
 
 main()
